@@ -25,4 +25,5 @@ public class Curso {
 	private String grado;
 	private String turno;
 	private String cupo_maximo;
+	private Long docenteId;
 }

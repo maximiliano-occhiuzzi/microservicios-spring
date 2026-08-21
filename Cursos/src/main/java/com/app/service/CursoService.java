@@ -5,7 +5,7 @@ import java.util.List;
 import com.app.model.Curso;
 
 public interface CursoService {
-	  Curso altaCursos(Curso curso);
+	Curso altaCursos(Curso curso);
 
-	    List<Curso> listarCursos();
+	List<Curso> listarCursos();
 }
