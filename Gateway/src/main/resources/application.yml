@@ -1,0 +1,30 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: ms-alumnos
+              uri: lb://ms-alumnos
+              predicates:
+                - Path=/alumnos/**
+            - id: ms-cursos
+              uri: lb://ms-cursos
+              predicates:
+                - Path=/cursos/**
+            - id: ms-administracion
+              uri: lb://ms-administracion
+              predicates:
+                - Path=/personal/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    lease-renewal-interval-in-seconds: 10
