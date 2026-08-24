@@ -24,4 +24,5 @@ public class Alumno {
     private String apellido;
     private String dni;
     private String email;
+    
 }

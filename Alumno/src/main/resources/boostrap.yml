@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    default: dev
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+    import: "optional:configserver:http://localhost:8888"
+---
