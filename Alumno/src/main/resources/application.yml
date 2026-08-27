@@ -1,3 +1,13 @@
 spring:
   application:
     name: modulo-alumnos
+  profiles:
+    default: dev
+  config:
+    import: "configserver:http://localhost:8888"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
