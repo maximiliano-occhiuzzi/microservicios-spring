@@ -15,14 +15,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Alumno {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nombre;
     private String apellido;
     private String dni;
     private String email;
-    
+
+    // No es un @OneToOne de JPA — es solo una referencia al ID
+    // del Curso, que vive en la base de datos de modulo-cursos.
+    private Long cursoId;
 }

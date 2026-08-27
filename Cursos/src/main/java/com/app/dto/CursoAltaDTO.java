@@ -1,11 +1,18 @@
 package com.app.dto;
 
-public record CursoAltaDTO(
-    String ciclo_lectivo,
-    String division,
-    String grado,
-    String turno,
-    String cupo_maximo,
-    Long docenteId
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-) {}
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CursoAltaDTO {
+    private Long id;
+    private String ciclo_lectivo;
+    private String division;
+    private String grado;
+    private String turno;
+    private String cupo_maximo;
+    private Long docenteId;
+}
