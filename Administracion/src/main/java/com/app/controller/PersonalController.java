@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.PersonalAltaDTO;
+import com.app.model.Curso;
 import com.app.model.Personal;
 import com.app.service.PersonalService;
 
@@ -43,5 +44,10 @@ public class PersonalController {
 	public ResponseEntity<List<Personal>> listarPersonal() {
 		return ResponseEntity.ok(personalService.listarPersonal());
 	}
-
+	 @GetMapping("/{id}")
+	    public ResponseEntity<Personal> obtenerPorId(@PathVariable Long id) {
+	        return personalService.obtenerPorId(id)
+	                .map(ResponseEntity::ok)
+	                .orElse(ResponseEntity.notFound().build());
+	    }
 }

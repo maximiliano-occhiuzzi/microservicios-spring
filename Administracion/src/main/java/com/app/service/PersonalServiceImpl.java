@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,11 @@ public class PersonalServiceImpl implements PersonalService {
     public List<Personal> listarPersonal() {
         return personalRepository.findAll();
     }
+
+	@Override
+	public Optional<Personal> obtenerPorId(Long id) {
+        return personalRepository.findById(id);
+	
+	}
 
 }
