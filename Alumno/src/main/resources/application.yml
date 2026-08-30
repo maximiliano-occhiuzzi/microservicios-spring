@@ -10,4 +10,5 @@ spring:
 spring:
   config:
     activate:
-      on-profile: dev
+      on-profile: docker
+    import: "configserver:http://configserver:8888"

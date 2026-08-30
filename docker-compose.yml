@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   registry:
     build: ./registry
@@ -9,39 +7,61 @@ services:
     networks:
       - school-net
 
+  configserver:
+    build: ./configServer
+    container_name: configserver
+    ports:
+      - "8888:8888"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - registry
+    networks:
+      - school-net
+
+  adminserver:
+    build: ./AdminServer
+    container_name: adminserver
+    ports:
+      - "8090:8090"
+    depends_on:
+      - registry
+    networks:
+      - school-net
+
   alumno:
     build: ./Alumno
-    container_name: ms-alumnos
+    container_name: modulo-alumnos
     ports:
       - "8084:8084"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
-      - registry
+      - configserver
     networks:
       - school-net
 
   cursos:
     build: ./Cursos
-    container_name: ms-cursos
+    container_name: modulo-cursos
     ports:
       - "8083:8083"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
-      - registry
+      - configserver
     networks:
       - school-net
 
   administracion:
     build: ./Administracion
-    container_name: ms-administracion
+    container_name: modulo-administracion
     ports:
       - "8085:8085"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
-      - registry
+      - configserver
     networks:
       - school-net
 
@@ -53,7 +73,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
-      - registry
+      - configserver
       - alumno
       - cursos
       - administracion

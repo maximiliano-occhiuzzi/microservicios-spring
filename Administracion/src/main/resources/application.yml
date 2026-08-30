@@ -5,3 +5,10 @@ spring:
     default: dev
   config:
     import: "configserver:http://localhost:8888"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+    import: "configserver:http://configserver:8888"
