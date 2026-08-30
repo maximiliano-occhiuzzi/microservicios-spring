@@ -7,29 +7,24 @@ spring:
         git:
           uri: https://github.com/maximiliano-occhiuzzi/remote-properties
           clone-on-start: true
-          default-label: master   
-
+          default-label: master
 server:
   port: 8888
-
 ---
 spring:
   config:
     activate:
       on-profile: dev
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-
 ---
 spring:
   config:
     activate:
-      on-profile: prod
-
+      on-profile: docker
 eureka:
   client:
     service-url:
-      defaultZone: http://eurekaserver:8761/eureka/
+      defaultZone: http://registry:8761/eureka/
