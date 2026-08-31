@@ -1,0 +1,87 @@
+﻿services:
+  registry:
+    image: maxmegafuego/ms-registry
+    container_name: registry
+    ports:
+      - "8761:8761"
+    networks:
+      - school-net
+
+  configserver:
+    image: maxmegafuego/ms-configserver
+    container_name: configserver
+    ports:
+      - "8888:8888"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - registry
+    networks:
+      - school-net
+
+  adminserver:
+    image: maxmegafuego/ms-adminserver
+    container_name: adminserver
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - registry
+    networks:
+      - school-net
+
+  alumno:
+    image: maxmegafuego/ms-alumno
+    container_name: modulo-alumnos
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - configserver
+    networks:
+      - school-net
+
+  cursos:
+    image: maxmegafuego/ms-cursos
+    container_name: modulo-cursos
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - configserver
+    networks:
+      - school-net
+
+  administracion:
+    image: maxmegafuego/ms-administracion
+    container_name: modulo-administracion
+    ports:
+      - "8085:8085"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - configserver
+    networks:
+      - school-net
+
+  gateway:
+    image: maxmegafuego/ms-gateway
+    container_name: gateway
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - configserver
+      - alumno
+      - cursos
+      - administracion
+    networks:
+      - school-net
+
+networks:
+  school-net:
+    driver: bridge
