@@ -3,7 +3,12 @@ spring:
     name: gateway
   profiles:
     default: dev
+
+---
+spring:
   config:
+    activate:
+      on-profile: dev
     import: "configserver:http://localhost:8888"
 
 ---
